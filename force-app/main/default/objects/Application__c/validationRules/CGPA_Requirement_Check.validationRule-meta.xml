@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CGPA_Requirement_Check</fullName>
+    <active>true</active>
+    <description>Prevent applications when student CGPA is below job minimum CGPA</description>
+    <errorConditionFormula>Student__r.CGPA__c &lt; Job__r.Minimum_CGPA__c</errorConditionFormula>
+    <errorMessage>Student CGPA is below the minimum CGPA required for this job.</errorMessage>
+</ValidationRule>
