@@ -1,19 +1,98 @@
 <template>
-
-    <lightning-card title="Data Binding Demo" icon-name="standard:people">
+    <lightning-card title="Placement Management System">
 
         <div class="slds-p-around_medium">
 
-            <h1 class="slds-text-heading_medium">
-                Data Binding Demo
+            <!-- Student Welcome -->
+            <h1 class="slds-text-heading_medium slds-m-bottom_medium">
+                Welcome, {studentName}
             </h1>
 
-            <br/>
+            <p class="slds-m-bottom_large">
+                Here are the placement opportunities available for you.
+            </p>
 
-            <h2>Hello {studentName}</h2>
+            <!-- Loading -->
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-p-around_medium">
+                    <lightning-spinner
+                        alternative-text="Loading jobs"
+                        size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <div class="slds-notify slds-notify_alert slds-theme_error slds-m-bottom_medium">
+                    <span>{errorMessage}</span>
+                </div>
+            </template>
+
+            <!-- Jobs -->
+            <template if:true={hasJobs}>
+
+                <div class="slds-grid slds-wrap slds-gutters">
+
+                    <template for:each={jobs} for:item="job">
+
+                        <div
+                            key={job.Id}
+                            class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-m-bottom_medium"
+                        >
+
+                            <lightning-card title={job.Name}>
+
+                                <div class="slds-p-around_medium">
+
+                                    <p class="slds-m-bottom_small">
+                                        <strong>Job ID:</strong>
+                                        {job.Id}
+                                    </p>
+
+                                    <p class="slds-m-bottom_small">
+                                        <strong>Minimum CGPA:</strong>
+                                        {job.Minimum_CGPA__c}
+                                    </p>
+
+                                    <p class="slds-m-bottom_small">
+                                        <strong>Eligible Branch:</strong>
+                                        {job.Eligible_Branch__c}
+                                    </p>
+
+                                    <p class="slds-m-bottom_medium">
+                                        <strong>Application Deadline:</strong>
+                                        {job.Closing_Date__c}
+                                    </p>
+
+                                    <!-- Job Card / Apply -->
+                                    <c-job-card
+                                        job={job}
+                                        onapply={handleApply}>
+                                    </c-job-card>
+
+                                </div>
+
+                            </lightning-card>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </template>
+
+            <!-- Empty State -->
+            <template if:true={showEmptyState}>
+                <div class="slds-align_absolute-center slds-p-around_large">
+                    <p class="slds-text-heading_small">
+                        No eligible jobs are currently available.
+                    </p>
+                </div>
+            </template>
 
         </div>
 
     </lightning-card>
-
 </template>

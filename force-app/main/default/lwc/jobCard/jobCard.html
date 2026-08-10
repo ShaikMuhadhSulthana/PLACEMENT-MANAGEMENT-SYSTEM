@@ -1,0 +1,23 @@
+<template>
+
+    <div class="slds-grid slds-grid_align-end">
+
+        <lightning-button
+            variant="brand"
+            label={buttonLabel}
+            onclick={handleApply}
+            disabled={isApplying}>
+        </lightning-button>
+
+        <template if:true={isApplying}>
+            <div class="slds-m-left_small slds-grid slds-grid_vertical-align-center">
+                <lightning-spinner
+                    alternative-text="Submitting application"
+                    size="small">
+                </lightning-spinner>
+            </div>
+        </template>
+
+    </div>
+
+</template>

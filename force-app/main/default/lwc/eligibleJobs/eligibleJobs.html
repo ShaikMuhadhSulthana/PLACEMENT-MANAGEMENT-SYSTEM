@@ -1,0 +1,13 @@
+<template>
+
+    <template for:each={jobs} for:item="job">
+
+        <c-job-card
+            key={job.Id}
+            job={job}
+            onapplyjob={handleApply}>
+        </c-job-card>
+
+    </template>
+
+</template>
