@@ -1,0 +1,35 @@
+<template>
+
+    <lightning-card title="Student Summary">
+
+        <div class="slds-p-around_medium">
+
+            <template if:true={hasStudentData}>
+
+                <p class="slds-text-heading_medium">
+                    Welcome, {studentName}
+                </p>
+
+                <p class="slds-m-top_small">
+                    Student ID: {studentId}
+                </p>
+
+                <p class="slds-m-top_small">
+                    CGPA: {cgpa}
+                </p>
+
+            </template>
+
+            <template if:true={student.error}>
+
+                <p class="slds-text-color_error">
+                    Unable to load student information.
+                </p>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

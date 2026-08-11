@@ -1,35 +1,19 @@
 public class PlacementNotificationJob implements Queueable {
 
-    private Id offerLetterId;
+    private Id applicationId;
 
-    public PlacementNotificationJob(Id offerLetterId) {
-        this.offerLetterId = offerLetterId;
+    public PlacementNotificationJob(Id applicationId) {
+        this.applicationId = applicationId;
     }
 
     public void execute(QueueableContext context) {
 
-        Offer_Letter__c offerLetter = [
-            SELECT Id,
-                   Name,
-                   Status__c,
-                   Student__c,
-                   Job__c
-            FROM Offer_Letter__c
-            WHERE Id = :offerLetterId
-            LIMIT 1
-        ];
+        System.debug('PlacementNotificationJob started');
+        System.debug('Application Id: ' + applicationId);
 
-        System.debug('======================================');
-        System.debug('PLACEMENT NOTIFICATION JOB STARTED');
-        System.debug('Offer Letter: ' + offerLetter.Name);
-        System.debug('Student: ' + offerLetter.Student__c);
-        System.debug('Job: ' + offerLetter.Job__c);
-        System.debug('Status: ' + offerLetter.Status__c);
+        // Simulate notification processing
+        System.debug('Preparing placement notification...');
 
-        // Simulating notification preparation.
-        System.debug('Placement notification prepared successfully.');
-
-        System.debug('PLACEMENT NOTIFICATION JOB COMPLETED');
-        System.debug('======================================');
+        System.debug('Placement notification processing completed');
     }
 }

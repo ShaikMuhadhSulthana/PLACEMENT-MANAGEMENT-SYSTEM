@@ -120,4 +120,32 @@ public class ApplicationService {
         return applicationRecord.Id;
     }
 
+
+    // Get eligible jobs for a student
+    public static List<Job__c> getEligibleJobs(
+        Id studentId
+    ) {
+
+        // Get Student details
+        Student__c student = [
+            SELECT Id, CGPA__c
+            FROM Student__c
+            WHERE Id = :studentId
+            LIMIT 1
+        ];
+
+
+        // Get eligible Jobs
+        return [
+            SELECT Id,
+                   Name,
+                   Minimum_CGPA__c,
+                   Closing_Date__c
+            FROM Job__c
+            WHERE Minimum_CGPA__c <= :student.CGPA__c
+            AND Closing_Date__c >= :Date.today()
+            ORDER BY Closing_Date__c ASC
+        ];
+    }
+
 }

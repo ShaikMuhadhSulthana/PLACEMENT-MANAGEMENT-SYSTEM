@@ -1,9 +1,14 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
-import submitApplication
-    from '@salesforce/apex/ApplicationController.submitApplication';
+import submitApplication from '@salesforce/apex/ApplicationController.submitApplication';
 
 export default class EligibleJobs extends LightningElement {
+
+    @api jobs = [];
+
+    get hasJobs() {
+        return this.jobs && this.jobs.length > 0;
+    }
 
     handleApply(event) {
 
@@ -34,4 +39,5 @@ export default class EligibleJobs extends LightningElement {
 
         });
     }
+
 }

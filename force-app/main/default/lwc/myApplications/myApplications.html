@@ -1,0 +1,103 @@
+<template>
+
+    <lightning-card title="My Applications">
+
+        <div class="slds-p-around_medium">
+
+            <template if:true={hasApplications}>
+
+                <template
+                    for:each={applications}
+                    for:item="application"
+                >
+
+                    <article
+                        key={application.applicationId}
+                        class="slds-card slds-card_boundary slds-m-bottom_small"
+                    >
+
+                        <div class="slds-card__body slds-card__body_inner">
+
+                            <h2 class="slds-text-heading_small">
+                                {application.jobName}
+                            </h2>
+
+                            <p class="slds-m-top_small">
+                                Status:
+                                <strong>
+                                    {application.status}
+                                </strong>
+                            </p>
+
+                            <p class="slds-m-top_x-small">
+                                Application Date:
+                                {application.applicationDate}
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </template>
+
+            </template>
+
+            <template if:false={hasApplications}>
+
+                <c-empty-state
+                    title="No applications yet"
+                    message="You have not applied for any jobs yet."
+                >
+                </c-empty-state>
+
+            </template>
+
+
+            <!-- OFFER LETTER -->
+
+            <template if:true={hasOfferLetters}>
+
+                <div class="slds-m-top_large">
+
+                    <h2 class="slds-text-heading_medium">
+                        Offer Information
+                    </h2>
+
+                    <template
+                        for:each={offerLetters}
+                        for:item="offer"
+                    >
+
+                        <div
+                            key={offer.Id}
+                            class="slds-box slds-m-top_small"
+                        >
+
+                            <p>
+                                <strong>Offer Letter:</strong>
+                                {offer.Name}
+                            </p>
+
+                            <p class="slds-m-top_x-small">
+                                <strong>Application:</strong>
+                                {offer.Application__r.Name}
+                            </p>
+
+                            <p class="slds-m-top_x-small">
+                                <strong>Status:</strong>
+                                {offer.Application__r.Status__c}
+                            </p>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
