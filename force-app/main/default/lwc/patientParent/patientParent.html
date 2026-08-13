@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Parent Component">
+        <div class="slds-p-around_medium">
+            <h2>Hospital OPD - Parent Component</h2>
+
+            <p><b>Patient ID:</b> {patientId}</p>
+
+            <c-patient-child
+                patient-id={patientId}
+                onnotify={handleNotify}>
+            </c-patient-child>
+
+            <p class="slds-m-top_medium">
+                <b>Status:</b> {message}
+            </p>
+
+        </div>
+    </lightning-card>
+</template>
